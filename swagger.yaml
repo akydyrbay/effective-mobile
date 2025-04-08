@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Person Enrichment API
+  description: API for enriching and storing personal data using external APIs
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /persons:
+    get:
+      summary: Get list of persons
+      parameters:
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: surname
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of people
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+    post:
+      summary: Create a new person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+      responses:
+        '201':
+          description: Person created
+    put:
+      summary: Update a person
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInput'
+      responses:
+        '200':
+          description: Person updated
+    delete:
+      summary: Delete a person by ID
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Person deleted
+
+components:
+  schemas:
+    PersonInput:
+      type: object
+      properties:
+        name:
+          type: string
+        surname:
+          type: string
+        patronymic:
+          type: string
+    Person:
+      allOf:
+        - $ref: '#/components/schemas/PersonInput'
+        - type: object
+          properties:
+            age:
+              type: integer
+            gender:
+              type: string
+            nationality:
+              type: string
