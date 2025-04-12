@@ -1,12 +1,13 @@
 package service
 
 import (
-	"effective-mobile/internal/dal"
-	"effective-mobile/models"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
+
+	"effective-mobile/internal/dal"
+	"effective-mobile/models"
 )
 
 type PersonService interface {
@@ -17,13 +18,11 @@ type PersonService interface {
 	EnrichPerson(name string) (age int, gender string, nationality string, err error)
 }
 
-// personService implements PersonService.
 type personService struct {
 	repo   dal.PersonRepository
 	client *http.Client
 }
 
-// NewPersonService creates a new service.
 func NewPersonService(repo dal.PersonRepository) PersonService {
 	return &personService{
 		repo: repo,

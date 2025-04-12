@@ -2,9 +2,10 @@ package dal
 
 import (
 	"database/sql"
-	"effective-mobile/models"
 	"fmt"
 	"strings"
+
+	"effective-mobile/models"
 )
 
 type PersonRepository interface {
@@ -46,7 +47,7 @@ func (r *personRepo) GetAll(filter models.FilterParams, pagination models.Pagina
 
 	limit := pagination.Limit
 	if limit <= 0 {
-		limit = 10 // default limit
+		limit = 10
 	}
 	offset := (pagination.Page - 1) * limit
 	if offset < 0 {

@@ -2,10 +2,6 @@ package cmd
 
 import (
 	"bufio"
-	"effective-mobile/internal/dal"
-	"effective-mobile/internal/handler"
-	"effective-mobile/internal/service"
-	"effective-mobile/postgres"
 	"flag"
 	"log"
 	"log/slog"
@@ -13,6 +9,11 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	"effective-mobile/internal/dal"
+	"effective-mobile/internal/handler"
+	"effective-mobile/internal/service"
+	"effective-mobile/postgres"
 )
 
 func ServeSwaggerFile(w http.ResponseWriter, r *http.Request) {
@@ -48,6 +49,7 @@ func loadEnv() error {
 
 	return scanner.Err()
 }
+
 func StartServer() {
 	err := loadEnv()
 	if err != nil {
