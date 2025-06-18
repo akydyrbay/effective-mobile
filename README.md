@@ -14,7 +14,7 @@
 {
 "name": "Dmitriy",
 "surname": "Ushakov",
-"patronymic": "Vasilevich" // необязательно
+"patronymic": "Vasilevich" 
 }
 ```
 2. Корректное сообщение обогатить
